@@ -1,0 +1,42 @@
+#ifndef __FILEH__
+#define __FILEH__
+
+#ifdef _WIN32
+    #include <Windows.h>  // For Windows-specific time functions
+#else
+    #include <sys/time.h>  // For Linux/Mac time functions
+#endif
+
+typedef struct {
+#ifdef _WIN32
+    LARGE_INTEGER startTime;
+    LARGE_INTEGER endTime;
+#else
+    struct timeval startTime;
+    struct timeval endTime;
+#endif
+} Timer;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void initVector(float **vec_h, unsigned size);
+void verify(float* input, unsigned num_elements, float result);
+void startTime(Timer* timer);
+void stopTime(Timer* timer);
+float elapsedTime(Timer timer);
+#ifdef __cplusplus
+}
+#endif
+
+#define FATAL(msg, ...) \
+    do { \
+        fprintf(stderr, "%s:%d: " msg "\n", __FILE__, __LINE__, ##__VA_ARGS__); \
+        exit(-1); \
+    } while(0)
+
+#if __BYTE_ORDER != __LITTLE_ENDIAN
+# error "File I/O is not implemented for this system: wrong endianness."
+#endif
+
+#endif
