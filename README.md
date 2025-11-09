@@ -32,3 +32,5 @@ The solution is a CUDA-based application developed in a Google Colab environment
   1.  **`histogramKernel` (Device Kernel)**: A CUDA kernel where each thread processes one element of the input array. It uses `atomicAdd` to safely increment bin counters in global memory, preventing race conditions.
   2.  **`histogram` (Host Function)**: A wrapper function that launches the kernel and handles the 8-bit saturation. It first computes the histogram into a temporary 32-bit integer array on the device (to prevent atomic operation overflow). It then copies this result to the host, iterates through it, and clamps (saturates) any value greater than 255 down to 255 before storing it in the final `uint8_t` host array.
 - **`notebook.ipynb`**: A Google Colab notebook used to set up the CUDA environment, compile the code using `nvcc`, and execute the program with various test cases.
+
+  ---
