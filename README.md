@@ -77,3 +77,5 @@ This is the parallel workload executed on the GPU.
 2.  **Boundary Check**: The thread checks `if (idx < num_elements)` to ensure it's within the bounds of the input array. This handles input sizes that aren't a perfect multiple of the block size.
 3.  **Get Bin Index**: It reads its assigned value from the input array (`unsigned int bin = input[idx]`).
 4.  **Atomic Increment**: After a second boundary check (`if (bin < num_bins)`), the thread uses `atomicAdd(&bins[bin], 1)` to increment the counter for that specific bin. `atomicAdd` is a thread-safe operation that prevents race conditions where multiple threads might try to write to the same bin simultaneously.
+
+---
