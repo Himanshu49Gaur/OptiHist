@@ -79,3 +79,15 @@ This is the parallel workload executed on the GPU.
 4.  **Atomic Increment**: After a second boundary check (`if (bin < num_bins)`), the thread uses `atomicAdd(&bins[bin], 1)` to increment the counter for that specific bin. `atomicAdd` is a thread-safe operation that prevents race conditions where multiple threads might try to write to the same bin simultaneously.
 
 ---
+
+## 6. Results
+
+The program was executed with three different test cases, and performance for each stage was timed. All tests passed verification.
+
+| Test Case | Input Size | Num Bins | Setup Time (s) | Alloc Time (s) | Copy Time (s) | Kernel Time (s) | Verification     |
+| :---      | :---       | :---     | :---           | :---           | :---          | :---            | :---             |
+| 1 (Default) | 1,000,000 | 4,096    | 0.027418       | 0.244691       | 0.003378      | 0.000569        | TEST PASSED      |
+| 2         | 50,000     | 4,096    | 0.001267       | 0.224315       | 0.002646      | 0.000228        | TEST PASSED      |
+| 3         | 50,000     | 1,024    | 0.001025       | 0.195822       | 0.000261      | 0.000180        | TEST PASSED      |
+
+*Data sourced from `result.pdf` [^33-59] and `notebook.ipynb` outputs.*
