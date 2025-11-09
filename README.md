@@ -104,3 +104,7 @@ The optimization process was successful and yielded measurable performance impro
 
 ---
 
+## 8. About the Author
+
+*(This section is a placeholder. You can add your name, LinkedIn, or GitHub profile here.)*
+
