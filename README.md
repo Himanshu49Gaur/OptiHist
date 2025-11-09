@@ -20,3 +20,5 @@ Secondary goals include:
 - Correctly implementing the 8-bit saturated counter logic[^74, 90].
 - Optimizing performance by tuning memory management (Host-to-Device/Device-to-Host transfers) and thread/block configurations[^4, 6, 16].
 - Verifying the correctness of the GPU-computed results[^4, 27].
+
+---
