@@ -52,3 +52,28 @@ The development and execution methodology follows these steps:
 
 ---
 
+## 5. Functioning of the Method
+
+The core of the project lies in the `kernel.cu` file.
+
+### Host Function: `histogram()`
+This function orchestrates the GPU work.
+1.  **Configures Launch Parameters**: Sets `threadsPerBlock` to 256 and calculates `blocksPerGrid` to ensure every element is covered by at least one thread.
+2.  **Allocates Intermediate Bins**: It allocates `bins_device` on the GPU using `unsigned int` (32-bit). This is critical to avoid overflow, as `atomicAdd` on 8-bit counters would be problematic and inefficient.
+3.  **Initializes Bins**: Uses `cudaMemset` to set all intermediate bins to 0.
+4.  **Launches Kernel**: Calls `histogramKernel`.
+5.  **Handles Saturation**: After the kernel finishes, it copies the 32-bit results to a `temp` host array. It then performs the saturation logic:
+    ```
+    // Convert and clamp values to 255 max (uint8_t range)
+    for (unsigned int i = 0; i < num_bins; ++i) {
+        bins_host[i] = (temp[i] > 255) ? 255 : temp[i];
+    }
+    ```
+    This ensures the final 8-bit array (`bins_host`) adheres to the lab's saturation requirement.
+
+### Device Kernel: `histogramKernel()`
+This is the parallel workload executed on the GPU.
+1.  **Thread Indexing**: Each thread calculates its unique global index `idx`.
+2.  **Boundary Check**: The thread checks `if (idx < num_elements)` to ensure it's within the bounds of the input array. This handles input sizes that aren't a perfect multiple of the block size.
+3.  **Get Bin Index**: It reads its assigned value from the input array (`unsigned int bin = input[idx]`).
+4.  **Atomic Increment**: After a second boundary check (`if (bin < num_bins)`), the thread uses `atomicAdd(&bins[bin], 1)` to increment the counter for that specific bin. `atomicAdd` is a thread-safe operation that prevents race conditions where multiple threads might try to write to the same bin simultaneously.
