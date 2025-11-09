@@ -1,0 +1,7 @@
+Setting up the problem...0.027418 s
+    Input size = 1000000
+    Number of bins = 4096
+Allocating device variables...0.244691 s
+Copying data from host to device...0.003378 s
+Launching kernel...0.000569 s
+Verifying results...TEST PASSED
