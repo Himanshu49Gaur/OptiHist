@@ -118,3 +118,8 @@ LinkedIn: https://linkedin.com/in/himanshu-gaur-305006282
 
 ---
 
+## 8. License
+
+This project is licensed under the **MIT License**.  
+You may use, modify, and distribute this project with proper credit to the original author.
+The author is not responsible for any misuse of the files/configuration.
