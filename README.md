@@ -34,3 +34,18 @@ The solution is a CUDA-based application developed in a Google Colab environment
 - **`notebook.ipynb`**: A Google Colab notebook used to set up the CUDA environment, compile the code using `nvcc`, and execute the program with various test cases.
 
   ---
+
+## 4. Proposed Methodology
+
+The development and execution methodology follows these steps:
+
+1.  **Environment Setup**: The project is run in a Google Colab notebook, mounting Google Drive to access project files. The GPU (`!nvidia-smi`) and CUDA compiler (`!nvcc --version`) are verified.
+2.  **Compilation**: The source files (`main.cu`, `kernel.cu`, `support.cu`) are compiled into an executable named `histogram` using `nvcc`, targeting the `sm_75` architecture (for the Colab Tesla T4 GPU).
+3.  **Host Setup**: `main.cu` parses command-line arguments for input size (`m`) and bin count (`n`). It defaults to 1,000,000 elements and 4,096 bins if no arguments are given.
+4.  **Memory Allocation**: Host memory is allocated for the input array and the final 8-bit bin array. Device memory is allocated for the input array.
+5.  **Data Transfer (H2D)**: The host input array is copied to the device.
+6.  **Kernel Launch**: The `histogram` host function is called. This function allocates device memory for 32-bit *intermediate* bins, initializes them to zero using `cudaMemset`, and then launches the `histogramKernel` with a calculated grid and block size (`BLOCK_SIZE = 256`).
+7.  **Data Transfer (D2H)**: After the kernel completes, the 32-bit intermediate bin array is copied from the device back to a temporary host array.
+8.  **Post-Processing (Saturation)**: The host CPU iterates through the 32-bit temporary array. For each value, it checks if it is greater than 255. If so, it stores 255 in the final 8-bit bin array; otherwise, it stores the value itself. This efficiently implements the saturation requirement.
+9.  **Verification**: A `verify` function is called to compare the GPU results against a CPU-based implementation, ensuring correctness. All test cases passed[^41, 50, 59].
+10. **Cleanup**: All allocated host and device memory is freed.
