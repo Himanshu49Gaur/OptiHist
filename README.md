@@ -94,3 +94,10 @@ The program was executed with three different test cases, and performance for ea
 
 ---
 
+## 7. Observation
+
+The optimization process was successful and yielded measurable performance improvements[^61].
+
+- **Memory Management Optimization**: By focusing on efficient data transfer and ensuring coalesced memory accesses, the time spent copying data was reduced[^7, 14]. For example, allocation time (which includes some data operations) dropped from **0.244691 s**[^38] to **0.195822 s**[^56] between Test Case 1 and Test Case 3 (which had optimized settings).
+- **Thread/Block Optimization**: Fine-tuning the thread and block configuration was crucial[^16]. A better configuration led to more effective parallelization, reduced GPU idle time, and maximized resource utilization[^17, 24]. This optimization reduced the kernel launch/execution time from **0.000569 s**[^21, 40] (naïve) to **0.000228 s**[^22, 49] (optimized).
+- **Future Work**: The performance was significantly improved, but the report notes that further optimizations are possible. Future work could involve using **shared memory** and exploring more advanced techniques for optimizing larger datasets[^64, 65, 67].
