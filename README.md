@@ -106,5 +106,12 @@ The optimization process was successful and yielded measurable performance impro
 
 ## 8. About the Author
 
-*(This section is a placeholder. You can add your name, LinkedIn, or GitHub profile here.)*
+Himanshu Gaur
+B.Tech Student | Cybersecurity & AI Enthusiast | GPU Computing Researcher
+Vellore Institute of Technology, Bhopal
+
+Himanshu Gaur is an aspiring researcher specializing in Deep Learning, Parallel Computing, and CUDA-based Optimization. His work focuses on developing efficient AI models, GPU-accelerated frameworks, and real-world computational systems.
+
+GitHub: https://github.com/Himanshu49Gaur
+LinkedIn: https://linkedin.com/in/himanshu-gaur-305006282
 
