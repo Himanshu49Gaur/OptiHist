@@ -16,3 +16,14 @@ Allocating device variables...0.224315 s
 Copying data from host to device...0.002646 s
 Launching kernel...0.000228 s
 Verifying results...TEST PASSED
+
+--------------------------------------------------------------------------------------------------
+
+
+Setting up the problem...0.001025 s
+    Input size = 50000
+    Number of bins = 1024
+Allocating device variables...0.195822 s
+Copying data from host to device...0.000261 s
+Launching kernel...0.000180 s
+Verifying results...TEST PASSED
