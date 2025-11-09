@@ -49,3 +49,6 @@ The development and execution methodology follows these steps:
 8.  **Post-Processing (Saturation)**: The host CPU iterates through the 32-bit temporary array. For each value, it checks if it is greater than 255. If so, it stores 255 in the final 8-bit bin array; otherwise, it stores the value itself. This efficiently implements the saturation requirement.
 9.  **Verification**: A `verify` function is called to compare the GPU results against a CPU-based implementation, ensuring correctness. All test cases passed[^41, 50, 59].
 10. **Cleanup**: All allocated host and device memory is freed.
+
+---
+
